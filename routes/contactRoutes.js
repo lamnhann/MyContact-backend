@@ -11,12 +11,12 @@ const router = express.Router();
 
 router.get("/", getContacts);
 
-router.post("/", createContact);
+router.post("/create", createContact);
 
 router.get("/:id", getContact);
 
-router.put("/:id", updateContact);
+router.put("/update/:id", updateContact);
 
-router.delete("/:id", deleteContact);
+router.delete("/delete/:id", deleteContact);
 
 export default router;
