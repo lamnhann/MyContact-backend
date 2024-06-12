@@ -1,14 +1,16 @@
 import asyncHandle from 'express-async-handler';
+import Contact from '../models/contactModel.js';
 
 // @desc Get all contacts
 // @route GET /api/contacts
 // @access public
 export const getContacts = asyncHandle(async (req, res) => {
-  res.status(200).json({ message: "Get all contact" });
+  const contacts = await Contact.find();
+  res.status(200).json(contacts);
 });
 
 // @desc Creat new contacts
-// @route POST /api/contacts
+// @route POST /api/contacts/create
 // @access public
 export const createContact = asyncHandle(async (req, res) => {
   console.log("The request body is:  ", req.body)
@@ -17,7 +19,14 @@ export const createContact = asyncHandle(async (req, res) => {
     res.status(400);
     throw new Error("All fields art mandatory");
   }
-  res.status(200).json({ message: "Create contact" });
+
+  const contact = await Contact.create({
+    name,
+    email,
+    phone,  
+  });
+
+  res.status(201).json(contact);
 });
 
 // @desc Get contact
