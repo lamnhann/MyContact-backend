@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import contactRouters from './routes/contactRoutes.js';
+import userRouters from './routes/userRoutes.js';
 import errorHandler from './middleware/errorHandler.js';
 
 dotenv.config();
@@ -20,6 +21,7 @@ const port = process.env.PORT || 5001;
 
 app.use(express.json());
 app.use("/api/contacts", contactRouters);
+app.use("/api/users", userRouters);
 app.use(errorHandler);
 
 app.listen(port, () => {
